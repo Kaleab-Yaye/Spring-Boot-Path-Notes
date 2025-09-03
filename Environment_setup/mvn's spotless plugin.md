@@ -48,6 +48,47 @@ now if we trust the person in our project then that would be it they would run t
 now that would contamnate our entire repository with meangless blames. so instead we ulize what is called pre-commite hooks. those are scipts that git will run just beofere wen we run git commite -m.
 now by making the /.mvnw spotless:apply/check scripts to run as the pre-commite hook we are makign sure teh commite wont happend if there is any violation in formating in our source code.
 
+# creating the preehooks.
+now when you have a riposotrey and run the git init. there will be a hidden file called git, wher every thing the pointers teh version controles and so on are found in. and inside this hidden .git file.
+there are what we call hooks. those are scripts that are run on the specfied spified life cyle of .git that we can replace adn costmize. exmample our own first intersetn is the teh pre-commite hook that run just beofre git actually commites our work. and here we can add the scripts we want. but here is the problem.
+
+in this defualt directory .gitfile are not going to be commited with the rest of our project. but we watn to share the rules with the rest of the team so waht we do is we ccreat a new hook dir and we configure
+git to look in to those files instead of the defualt hook dir;
+
+* ***step one***; make a new dir called hook in the root dir of your project. ```mkdir .githooks```
+* **step two***; creat a new file name **pre-commit** in the hook dir. ```New-Item .githooks/pre-commit```
+* **step three**; congfigure git to look for hoos in the new location with the command. ```git config core.hooksPath .githooks```
+
+* `step four`; now look there are two things that we need the pree-commite hook to do and that is check the fforrmat wiht the spottles plugin and we also need , most of teh time, to check if the logic of teh source code that is going to be commited doest vilet our bussines logic. so we need to run the screepts and those are `./mvmw spottles:check` and ` ./mvmw test`
+so now we will add the follwoing script to the pre-commite file that we created in the  hooks directory
+
+```pwer shell
+#!/bin/sh
+# PowerShell Pre-Commit Hook
+
+echo "Running pre-commit hook..."
+
+# Run Spotless check
+./mvnw spotless:check
+if ($LASTEXITCODE -ne 0) {
+    echo "Spotless check failed. Aborting commit."
+    exit 1
+}
+
+# Run tests
+./mvnw test
+if ($LASTEXITCODE -ne 0) {
+    echo "Tests failed. Aborting commit."
+    exit 1
+}
+
+echo "Pre-commit checks passed. Proceeding with commit."
+exit 0
+```
+
+the final exit code will tell git to prossed with commite or not to
+
+
 
 
 

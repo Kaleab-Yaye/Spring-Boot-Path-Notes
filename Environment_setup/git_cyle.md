@@ -2,3 +2,6 @@
 * now that we have a locall repository we need to creat the remote repository on github
 * so creat a ripository on git hub.
 * once you do you need to `git status`
+* then you `git add .`
+* then you `git commite -m "your comment "`
+* tehn you 

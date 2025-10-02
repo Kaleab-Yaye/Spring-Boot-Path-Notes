@@ -44,7 +44,7 @@ now what happend is the sprinng boot tryes to handel how AOPs?
 
 and it does this, by creating poxy that will be the, metaphoricall envolop for our real class and here is what happens.
 
-# Case 1 
+# Case 1 (JDK Dynamic Proxy)
 this is entirely for class that are elgibal eto be bean but also extend some type of inteface, like ours does.
 so the firs thing it does is it creats a new helper class, which is a long named with man $ symboles to show it is a helper class but we will call it `$Proxy0`. now this proxy has some imporatn fields.
 like the treasaction manger but more imporatantly for as a field named `target` what is stored in this trage field is the original bean that spring created, it will inject it here.
@@ -146,7 +146,7 @@ no trasaction oppration happens.
 those methode will crash, but what you can do is you can make those interface defined and our class implimented methode to call and use those helper new class thsi way onse the call is deligated to the real bean they can
 use this to call on them
 
-# Case 2: the CGLIB way.
+# Case 2: the CGLIB" (Code Generation Library) way.
 
 now this one is easier, and invloeve the library CGLIB. here we assuem the service class doesnt impliment any type of intepase. so now a bean for this class will be meade too, and then spirng will discovre it has
 AOP anotation so what it does is it creates a new proxy that extendes the orginall class and has the ban object in its traget field. so now when you aoutwrire and use this class you are aoutwriign this proxy even thou

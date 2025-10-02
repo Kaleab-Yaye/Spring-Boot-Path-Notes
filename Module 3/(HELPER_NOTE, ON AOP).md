@@ -150,7 +150,7 @@ use this to call on them
 
 now this one is easier, and invloeve the library CGLIB. here we assuem the service class doesnt impliment any type of intepase. so now a bean for this class will be meade too, and then spirng will discovre it has
 AOP anotation so what it does is it creates a new proxy that extendes the orginall class and has the ban object in its traget field. so now when you aoutwrire and use this class you are aoutwriign this proxy even thou
-unliek the intraface bassed proxy you are nto using the differn name here you just aoutwire it. the only thing you shoudl know here is that you can define any of those methode to be Fianl, as it can ovvride those methodes
+unliek the intraface bassed proxy you are nto using the differn name here you just aoutwire it. the only thing you shoudl know here is that you cant define any of those methode to be Fianl, as it cant ovvride those methodes
 .
 
 but the rest of the Excution Delegtion algorizm is the same with the inteface bassed one. 
